@@ -7,9 +7,57 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
-        
-        
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+
+            <Label Grid.ColumnSpan="2"
+                   Content="Label" 
+                   HorizontalAlignment="Left"
+                   Padding="10"
+                   Margin="0" 
+                   VerticalAlignment="Top"/>
+
+            <Label Grid.ColumnSpan="2"
+                   Content="Label" 
+                   HorizontalAlignment="Left"
+                   Padding="10"
+                   Margin="0" 
+                   VerticalAlignment="Top"/>
+
+            <Label Grid.ColumnSpan="2"
+                   Content="Label" 
+                   HorizontalAlignment="Left"
+                   Margin="0" 
+                   Padding="10"
+                   VerticalAlignment="Top"/>
+        </StackPanel>
+        <Button Content="Igen"
+                Grid.ColumnSpan="2"
+                Grid.Column="0" 
+                HorizontalAlignment="Left"
+                Margin="0" 
+                Grid.Row="2" 
+                VerticalAlignment="Top"
+                Width="75"/>
+
+        <Button Content="Nem"
+                 Grid.ColumnSpan="2"
+                Grid.Column="0" 
+                HorizontalAlignment="Right"
+                Margin="0" 
+                Grid.Row="2" 
+                VerticalAlignment="Top"
+                Width="75"/>
+
+
+
     </Grid>
 </Window>
