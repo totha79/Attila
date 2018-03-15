@@ -79,12 +79,14 @@
                Grid.Column="0"    
                Grid.Row="1"
                Margin="20"
+               Foreground="BlueViolet"
                          />
 
         <fa:ImageAwesome Icon="AddressCard"
                Grid.Column="1"    
                Grid.Row="1"
                Margin="20"
+               Foreground="Magenta"
                          />
 
 
