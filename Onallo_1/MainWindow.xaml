@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Onallo_1"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -16,8 +18,11 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+      
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
-
+            
+<!--felső sor vímkéi______________________________________________________________-->
+            
             <Label Grid.ColumnSpan="2"
                    Content="Label" 
                    HorizontalAlignment="Left"
@@ -39,24 +44,48 @@
                    Padding="10"
                    VerticalAlignment="Top"/>
         </StackPanel>
+        
+<!--alsó sor gombjai________________________________________________________________-->
+        
         <Button Content="Igen"
                 Grid.ColumnSpan="2"
                 Grid.Column="0" 
                 HorizontalAlignment="Left"
-                Margin="0" 
+                Margin="10" 
                 Grid.Row="2" 
                 VerticalAlignment="Top"
-                Width="75"/>
+                Width="75"
+                />
 
         <Button Content="Nem"
                  Grid.ColumnSpan="2"
                 Grid.Column="0" 
                 HorizontalAlignment="Right"
-                Margin="0" 
+                Margin="10" 
                 Grid.Row="2" 
                 VerticalAlignment="Top"
                 Width="75"/>
 
+        <Button Content="Részben"
+                 Grid.ColumnSpan="2"
+                Grid.Column="0" 
+                HorizontalAlignment="Center"
+                Margin="10" 
+                Grid.Row="2" 
+                VerticalAlignment="Top"
+                Width="75"/>
+ <!--két kép jobb és bal________________________________________________-->
+        <fa:ImageAwesome Icon="AddressBook"
+               Grid.Column="0"    
+               Grid.Row="1"
+               Margin="20"
+                         />
+
+        <fa:ImageAwesome Icon="AddressCard"
+               Grid.Column="1"    
+               Grid.Row="1"
+               Margin="20"
+                         />
 
 
     </Grid>
