@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Onallo_1"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Background="CadetBlue">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -24,6 +24,7 @@
             <!--felső sor vímkéi______________________________________________________________-->
 
             <Label Grid.ColumnSpan="2"
+                   x:Name="One"
                    Content="Label" 
                    HorizontalAlignment="Left"
                    Padding="10"
@@ -32,6 +33,7 @@
 
             <Label Grid.ColumnSpan="2"
                    Content="Label" 
+                   x:Name="Two"
                    HorizontalAlignment="Left"
                    Padding="10"
                    Margin="0" 
@@ -39,6 +41,7 @@
 
             <Label Grid.ColumnSpan="2"
                    Content="Label" 
+                   x:Name="Three"
                    HorizontalAlignment="Left"
                    Margin="0" 
                    Padding="10"
@@ -48,7 +51,7 @@
                 DisplayDate="2018-03-15"
                 FirstDayOfWeek="Monday"
                 SelectedDateFormat="Short"/>
-            <Menu Width="100">
+            <Menu Width="100" Background="CadetBlue">
                 <MenuItem Header="_File">
                     <MenuItem.RenderTransform>
                         <TransformGroup>
@@ -58,9 +61,15 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </MenuItem.RenderTransform>
-                    <MenuItem Header="_Open" />
-                    <MenuItem Header="Copy" Command="Copy"/>
-                    <MenuItem Header="Paste" Command="Paste"/>
+                    <MenuItem Header="_Open" Command="Open" />
+                    <MenuItem Header="Copy" Command="Copy" Click="MenuItem_Click"/>
+                    <MenuItem Header="Paste" Command="Paste">
+                        <MenuItem.Icon>
+                            <fa:ImageAwesome Icon="Paste"></fa:ImageAwesome>
+                        </MenuItem.Icon>
+                        
+                        
+                    </MenuItem>
                 </MenuItem>
 
 
@@ -76,6 +85,7 @@
         <!--alsó sor gombjai________________________________________________________________-->
 
         <Button Content="Igen"
+                x:Name="YesButton"
                 Grid.ColumnSpan="2"
                 Grid.Column="0" 
                 HorizontalAlignment="Left"
@@ -83,15 +93,18 @@
                 Grid.Row="2" 
                 VerticalAlignment="Top"
                 Width="75"
+                IsEnabled="False"
                 />
 
         <Button Content="Nem"
+                x:Name="NoButton"
                  Grid.ColumnSpan="2"
                 Grid.Column="0" 
                 HorizontalAlignment="Right"
                 Margin="10" 
                 Grid.Row="2" 
                 VerticalAlignment="Top"
+                IsEnabled="False"
                 Width="75"/>
 
         <Button Content="Új kártya"

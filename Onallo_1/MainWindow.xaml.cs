@@ -21,7 +21,12 @@ namespace Onallo_1
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+    
     {
+        int Elso = 0;
+        int Masodik = 0;
+        int Harmadik= 0;
+        int DobasokSzama = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,18 +41,45 @@ namespace Onallo_1
         {
             //Kártyák létrehozása
             var Kartyak = new FontAwesomeIcon[4];
-            Kartyak[0] = FontAwesomeIcon.Gamepad;
-            Kartyak[1] = FontAwesomeIcon.Globe;
+            Kartyak[0] = FontAwesomeIcon.Gift;
+            Kartyak[1] = FontAwesomeIcon.Github;
             Kartyak[2] = FontAwesomeIcon.Glass;
-            Kartyak[3] = FontAwesomeIcon.Google;
-         
+            Kartyak[3] = FontAwesomeIcon.Gamepad;
 
-            var kocka = new Random();
-            var dobas = kocka.Next(0, 3);
-            Debug.WriteLine(dobas);
+            var DoboKocka = new Random();
+            var Dobas = DoboKocka.Next(0, 3);
 
-            RightCard.Icon = Kartyak[dobas];
+            Debug.WriteLine(DobasokSzama);
+            DobasokSzama++;
+            RightCard.Icon = Kartyak[Dobas];
+            if (DobasokSzama>1)
+            {
+                NoButton.IsEnabled = true;
+                YesButton.IsEnabled = true;
+            }
 
+
+            if (Dobas == 0)
+            {
+                Elso++;
+            }
+            One.Content = Elso;
+            if (Dobas == 1)
+            {
+                Masodik++;
+            }
+            Two.Content = Masodik;
+            if (Dobas == 2)
+            {
+                Harmadik++;
+            }
+            Three.Content = Harmadik;
+
+
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
