@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using FontAwesome.WPF;
 
+
 namespace Onallo_1
 {
     /// <summary>
@@ -27,9 +28,16 @@ namespace Onallo_1
         int Masodik = 0;
         int Harmadik= 0;
         int DobasokSzama = 0;
+       
+       
+
+        FontAwesomeIcon Elozokartya = FontAwesomeIcon.None;
+        
+
         public MainWindow()
         {
             InitializeComponent();
+           
         }
 
         private void Menu_Checked(object sender, RoutedEventArgs e)
@@ -38,6 +46,14 @@ namespace Onallo_1
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewCardShow();
+
+        }
+        /// <summary>
+        /// Ez a függvény új kártyát ad az Új kártya az Igen és a Nem válasz esetén is.
+        /// </summary>
+        private void NewCardShow()
         {
             //Kártyák létrehozása
             var Kartyak = new FontAwesomeIcon[4];
@@ -50,12 +66,16 @@ namespace Onallo_1
             var Dobas = DoboKocka.Next(0, 3);
 
             Debug.WriteLine(DobasokSzama);
-            DobasokSzama++;
+            Elozokartya = RightCard.Icon;
             RightCard.Icon = Kartyak[Dobas];
-            if (DobasokSzama>1)
+           
+            DobasokSzama++;
+            
+            if (DobasokSzama > 1)
             {
                 NoButton.IsEnabled = true;
                 YesButton.IsEnabled = true;
+                NewButton.IsEnabled = false;
             }
 
 
@@ -74,13 +94,57 @@ namespace Onallo_1
                 Harmadik++;
             }
             Three.Content = Harmadik;
-
-
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Elozokartya==RightCard.Icon)
+            {
+                CorrectAnswer();
+               
+            }
+            else
+            {
+                IncorrectAnswer();
+            }
+            NewCardShow();
+        }
+
+      
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Elozokartya == RightCard.Icon)
+            {
+                IncorrectAnswer();
+            }
+            else
+            {
+                CorrectAnswer();
+            }
+            NewCardShow();
+
+        }
+        private  void CorrectAnswer()
+        {
+            LeftCardPlace.Icon = FontAwesomeIcon.Check;
+            Debug.WriteLine("A válasz helyes");
+    
+         
+       
+        }
+
+        private  void IncorrectAnswer()
+        {
+            LeftCardPlace.Icon = FontAwesomeIcon.CheckCircle;
+            Debug.WriteLine("A válasz helytelen");
+            
+         
         }
     }
 }
