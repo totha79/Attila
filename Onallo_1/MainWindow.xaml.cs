@@ -103,10 +103,15 @@ namespace Onallo_1
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Elozokartya==RightCard.Icon)
+            YesAnswer();
+        }
+
+        private void YesAnswer()
+        {
+            if (Elozokartya == RightCard.Icon)
             {
                 CorrectAnswer();
-               
+
             }
             else
             {
@@ -115,9 +120,14 @@ namespace Onallo_1
             NewCardShow();
         }
 
-      
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            NoAnswer();
+
+        }
+
+        private void NoAnswer()
         {
             if (Elozokartya == RightCard.Icon)
             {
@@ -128,8 +138,8 @@ namespace Onallo_1
                 CorrectAnswer();
             }
             NewCardShow();
-
         }
+
         private  void CorrectAnswer()
         {
             LeftCardPlace.Icon = FontAwesomeIcon.Check;
@@ -145,6 +155,25 @@ namespace Onallo_1
             Debug.WriteLine("A válasz helytelen");
             
          
+        }
+        /// <summary>
+        /// Billentyű lenyomására történő viselkedés
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Debug.WriteLine(e.Key);
+            if (e.Key==Key.Left && DobasokSzama>1)
+            {
+                YesAnswer();
+            }
+            if (e.Key == Key.Right && DobasokSzama > 1)
+            {
+                NoAnswer();
+            }
+
+
         }
     }
 }
