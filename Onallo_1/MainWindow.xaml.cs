@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using FontAwesome.WPF;
-
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace Onallo_1
 {
@@ -24,12 +25,14 @@ namespace Onallo_1
     public partial class MainWindow : Window
     
     {
-        int Elso = 0;
-        int Masodik = 0;
-        int Harmadik= 0;
+       
         int DobasokSzama = 0;
-       
-       
+        Random DoboKocka = new Random();
+        FontAwesomeIcon[] Kartyak = new FontAwesomeIcon[4];
+        TimeSpan hatralevoIdo=TimeSpan.FromSeconds(3);
+        DispatcherTimer Idozito;
+
+
 
         FontAwesomeIcon Elozokartya = FontAwesomeIcon.None;
         
@@ -37,17 +40,47 @@ namespace Onallo_1
         public MainWindow()
         {
             InitializeComponent();
-           
+            //Kártyák létrehozása
+            Kartyak[0] = FontAwesomeIcon.Gift;
+            Kartyak[1] = FontAwesomeIcon.Github;
+            Kartyak[2] = FontAwesomeIcon.Glass;
+            Kartyak[3] = FontAwesomeIcon.Gamepad;
+
+
+
+            Idozito = new DispatcherTimer(TimeSpan.FromSeconds(1)
+                , DispatcherPriority.Normal
+                , OraUtes
+                , Application.Current.Dispatcher);
         }
 
-        private void Menu_Checked(object sender, RoutedEventArgs e)
+        private void OraUtes(object sender, EventArgs e)
         {
+            hatralevoIdo = hatralevoIdo - TimeSpan.FromSeconds(1);
+            BackTime.Content = $"Visszaszámláló: {hatralevoIdo}";
+            if (hatralevoIdo==TimeSpan.Zero)
+            {
+                JatekVege();
+
+               
+            }
+        }
+
+        private void JatekVege()
+        {
+            Idozito.Stop();
+            MessageBoxResult S = MessageBox.Show("VÉGE A JÁTÉKNAK. Folytatod????", "ttt", MessageBoxButton.YesNo, MessageBoxImage.Error);
+            if (S == MessageBoxResult.Yes)
+            {
+                JatekVege();
+            }
 
         }
 
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             NewCardShow();
+           
 
         }
         /// <summary>
@@ -55,19 +88,24 @@ namespace Onallo_1
         /// </summary>
         private void NewCardShow()
         {
-            //Kártyák létrehozása
-            var Kartyak = new FontAwesomeIcon[4];
-            Kartyak[0] = FontAwesomeIcon.Gift;
-            Kartyak[1] = FontAwesomeIcon.Github;
-            Kartyak[2] = FontAwesomeIcon.Glass;
-            Kartyak[3] = FontAwesomeIcon.Gamepad;
+           
 
-            var DoboKocka = new Random();
+           
             var Dobas = DoboKocka.Next(0, 3);
 
             Debug.WriteLine(DobasokSzama);
             Elozokartya = RightCard.Icon;
             RightCard.Icon = Kartyak[Dobas];
+            //Régi kártí WLTÜNTETÉSE
+
+            var AnimOut = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+            RightCard.BeginAnimation(OpacityProperty, AnimOut);
+
+            var AnimIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            RightCard.BeginAnimation(OpacityProperty, AnimIn);
+           
+      
+
            
             DobasokSzama++;
             
@@ -79,27 +117,24 @@ namespace Onallo_1
             }
 
 
-            if (Dobas == 0)
-            {
-                Elso++;
-            }
-            One.Content = Elso;
-            if (Dobas == 1)
-            {
-                Masodik++;
-            }
-            Two.Content = Masodik;
-            if (Dobas == 2)
-            {
-                Harmadik++;
-            }
-            Three.Content = Harmadik;
+            //if (Dobas == 0)
+            //{
+            //    Elso++;
+            //}
+            //One.Content = Elso;
+            //if (Dobas == 1)
+            //{
+            //    Masodik++;
+            //}
+            //Two.Content = Masodik;
+            //if (Dobas == 2)
+            //{
+            //    Harmadik++;
+            //}
+            //Three.Content = Harmadik;
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -143,23 +178,30 @@ namespace Onallo_1
         private  void CorrectAnswer()
         {
             LeftCardPlace.Icon = FontAwesomeIcon.Check;
-            Debug.WriteLine("A válasz helyes");
-    
-         
-       
+            LeftCardPlace.Foreground = Brushes.Green;
+            //animáció
+            EltuntetoAnimacio();
+
+        }
+
+        private void EltuntetoAnimacio()
+        {
+            var Nimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(1000));
+            LeftCardPlace.BeginAnimation(OpacityProperty, Nimation);
         }
 
         private  void IncorrectAnswer()
         {
-            LeftCardPlace.Icon = FontAwesomeIcon.CheckCircle;
+            LeftCardPlace.Icon = FontAwesomeIcon.Times;
+            LeftCardPlace.Foreground = Brushes.Red;
             Debug.WriteLine("A válasz helytelen");
-            
-         
+            EltuntetoAnimacio();
+
         }
         /// <summary>
         /// Billentyű lenyomására történő viselkedés
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender"></param>.
         /// <param name="e"></param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -175,5 +217,10 @@ namespace Onallo_1
 
 
         }
+
+     
+        
+
+      
     }
 }

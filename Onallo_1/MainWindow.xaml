@@ -43,7 +43,7 @@
             <!--felső sor vímkéi______________________________________________________________-->
 
             <Label Grid.ColumnSpan="2"
-                   x:Name="One"
+                   x:Name="BackTime"
                    Content="Label" 
                    HorizontalAlignment="Left"
                    Padding="10"
@@ -65,13 +65,8 @@
                    Margin="0" 
                    Padding="10"
                    VerticalAlignment="Top"/>
-            <DatePicker
-                HorizontalAlignment="Right"
-                DisplayDate="2018-03-15"
-                FirstDayOfWeek="Monday"
-                SelectedDateFormat="Short"/>
-            <Menu Width="100" Background="CadetBlue">
-                <MenuItem Header="_File">
+            <!--<Menu Width="100" Background="CadetBlue">
+                --><!--<MenuItem Header="_File">
                     <MenuItem.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -89,11 +84,11 @@
 
 
                     </MenuItem>
-                </MenuItem>
+                </MenuItem>--><!--
 
 
 
-            </Menu>
+            </Menu>-->
 
 
 
@@ -153,15 +148,17 @@
                 VerticalAlignment="Top"
                 Width="75" Click="NewButton_Click"/>
         <!--két kép jobb és bal________________________________________________-->
-      
+
 
         <fa:ImageAwesome 
                x:Name="RightCard"
                Grid.Column="1"    
                Grid.Row="1"
                Margin="10,20,30,20"
-             Icon="None"
+             Icon="None" 
                          />
+
+   
 
 
     </Grid>
